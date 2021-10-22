@@ -68,4 +68,17 @@ class EnvironmentTest {
 
     assertEquals(0, environment.valueOf("x"));
   }
+
+  @Test
+  public void usingAVariableCreatesIt() {
+    Environment environment = new Environment();
+
+    assertFalse(environment.variableExists("x"));
+    assertFalse(environment.variableExists("y"));
+
+    assertEquals(0, environment.valueOf("x"));
+
+    assertTrue(environment.variableExists("x"));
+    assertFalse(environment.variableExists("y"));
+  }
 }

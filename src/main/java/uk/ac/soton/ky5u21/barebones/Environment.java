@@ -53,4 +53,15 @@ public class Environment {
   public void decrement(String name) {
     variables.put(name, valueOf(name) - 1);
   }
+
+  /**
+   * Returns true if the variable has ever been used. Used for tests. This method *does not* create
+   * a variable.
+   *
+   * @param name The name of the variable
+   * @return `true` if the variable has been used, otherwise `false`
+   */
+  public boolean variableExists(String name) {
+    return variables.get(name) != null;
+  }
 }

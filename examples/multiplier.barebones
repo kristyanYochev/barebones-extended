@@ -1,3 +1,5 @@
+# multiplies x by 2 and stores the result in y
+
 clear x;
 clear y;
 

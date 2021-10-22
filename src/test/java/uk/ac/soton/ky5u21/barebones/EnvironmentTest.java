@@ -81,4 +81,27 @@ class EnvironmentTest {
     assertTrue(environment.variableExists("x"));
     assertFalse(environment.variableExists("y"));
   }
+
+  @Test
+  public void environmentStringifiesEachNameValuePairOnASeparateLine() {
+    Environment environment = new Environment();
+
+    environment.increment("x");
+    environment.increment("x");
+
+    environment.increment("y");
+
+    environment.increment("z");
+    environment.increment("z");
+    environment.increment("z");
+
+    String representation = environment.toString();
+
+    // Order of variables does not matter
+    assertTrue(representation.contains("x=2"));
+    assertTrue(representation.contains("y=1"));
+    assertTrue(representation.contains("z=3"));
+
+    assertEquals(3, representation.split("\n").length);
+  }
 }

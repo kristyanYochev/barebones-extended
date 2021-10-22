@@ -1,6 +1,7 @@
 package uk.ac.soton.ky5u21.barebones;
 
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 /**
  * Instances of this class store the variable values during program execution
@@ -63,5 +64,12 @@ public class Environment {
    */
   public boolean variableExists(String name) {
     return variables.get(name) != null;
+  }
+
+  @Override
+  public String toString() {
+    return variables.entrySet().stream()
+        .map(variable -> variable.getKey() + '=' + variable.getValue())
+        .collect(Collectors.joining("\n"));
   }
 }

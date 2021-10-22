@@ -1,0 +1,58 @@
+group 'uk.ac.soton'
+version '1.0'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'antlr'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.antlr:antlr4-runtime:4.9.1"
+    antlr "org.antlr:antlr4:4.9.1"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.4.2"
+    testRuntime "org.junit.jupiter:junit-jupiter-engine:5.4.2"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class' : 'uk.ac.soton.ky5u21.barebones.Barebones'
+    }
+
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+}
+
+generateGrammarSource {
+    arguments = ['-visitor', '-package', 'uk.ac.soton.ky5u21.barebones']
+    outputDirectory = file("${project.buildDir}/generated-src/main/java/")
+
+    doLast {
+        copy {
+            from "${project.buildDir}/generated-src/main/java/"
+            into "src/generated/java"
+        }
+    }
+}
+
+compileJava.dependsOn generateGrammarSource
+compileJava {
+    source = ['build/generated-src/main/java', 'src/main/java']
+}
+
+task removeGeneratedSource(type: Delete) {
+    delete 'src/generated'
+}
+clean.dependsOn removeGeneratedSource
+
+sourceSets.main.java.srcDirs += file("src/generated/java")
+idea {
+    module {
+        generatedSourceDirs += file("src/generated/java")
+    }
+}

@@ -8,7 +8,23 @@ import static uk.ac.soton.ky5u21.barebones.BarebonesParser.*;
  */
 public class Interpreter extends BarebonesBaseVisitor<Void> {
 
-  private final Environment environment = new Environment();
+  private final Environment environment;
+
+  /**
+   * Initialize the interpreter with the given environment
+   *
+   * @param environment The environment to run
+   */
+  public Interpreter(Environment environment) {
+    this.environment = environment;
+  }
+
+  /**
+   * Initialize the interpreter with am empty environment
+   */
+  public Interpreter() {
+    this.environment = new Environment();
+  }
 
   /**
    * Execution of a program. Just executes each statement one by one.

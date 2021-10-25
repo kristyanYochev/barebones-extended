@@ -1,10 +1,5 @@
 # multiplies x by 2 and stores the result in y
 
-clear x;
-clear y;
-
-incr x; incr x; incr x;
-
 while x not 0 do;
   incr y;
   incr y;

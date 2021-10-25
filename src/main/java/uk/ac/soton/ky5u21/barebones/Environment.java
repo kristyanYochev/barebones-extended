@@ -1,6 +1,7 @@
 package uk.ac.soton.ky5u21.barebones;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -8,7 +9,23 @@ import java.util.stream.Collectors;
  */
 public class Environment {
 
-  private final HashMap<String, Integer> variables = new HashMap<>();
+  private final Map<String, Integer> variables;
+
+  /**
+   * Initialize the environment with the variable values
+   *
+   * @param variables A map of type name->value
+   */
+  public Environment(Map<String, Integer> variables) {
+    this.variables = variables;
+  }
+
+  /**
+   * Initialize the environment with no variables
+   */
+  public Environment() {
+    this.variables = new HashMap<>();
+  }
 
   /**
    * Retrieves the value of a variable given the name. If the variable has not been encountered yet,

@@ -27,6 +27,10 @@ public class ProgramArguments {
   }
 
   private static Environment environmentFromInputArgs(String[] inputArgs) throws InvalidArguments {
+    if (inputArgs == null) {
+      return new Environment();
+    }
+
     if (inputArgs.length % 2 != 0) {
       throw new InvalidArguments("Cannot parse input variables");
     }

@@ -1,6 +1,7 @@
 package uk.ac.soton.ky5u21.barebones;
 
 import static uk.ac.soton.ky5u21.barebones.BarebonesParser.*;
+import java.util.Scanner;
 
 /**
  * This class implements a a visitor for the parse tree of barebones and executes each node it
@@ -9,6 +10,7 @@ import static uk.ac.soton.ky5u21.barebones.BarebonesParser.*;
 public class Interpreter extends BarebonesBaseVisitor<Void> {
 
   private final Environment environment;
+  private final Scanner stdin = new Scanner(System.in);
 
   /**
    * Initialize the interpreter with the given environment
@@ -92,6 +94,23 @@ public class Interpreter extends BarebonesBaseVisitor<Void> {
     while (environment.valueOf(conditionVariableName) != 0) {
       ctx.body.forEach(this::visit);
     }
+    return null;
+  }
+
+  /**
+   * Invoked when encountering a input node. Gets a number from the standard input and sets
+   * the value of the given variable to that number.
+   *
+   * @param ctx Input parse tree node
+   * @return null
+   */
+  @Override
+  public Void visitInput(InputContext ctx) {
+    String inputVariableName = ctx.name.getText();
+    int newValue = stdin.nextInt();
+
+    environment.set(inputVariableName, newValue);
+
     return null;
   }
 

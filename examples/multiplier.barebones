@@ -1,5 +1,7 @@
 # multiplies x by 2 and stores the result in y
 
+input x;
+
 while x not 0 do;
   incr y;
   incr y;

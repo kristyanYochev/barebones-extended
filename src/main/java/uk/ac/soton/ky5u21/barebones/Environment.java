@@ -46,6 +46,16 @@ public class Environment {
   }
 
   /**
+   * Sets the value of a variable
+   * 
+   * @param name The name of the variable
+   * @param value The new value of the variable
+   */
+  public void set(String name, int value) {
+    variables.put(name, value);
+  }
+
+  /**
    * Sets the value of a variable to 0.
    *
    * @param name The name of the variable

@@ -4,11 +4,13 @@ program: statement* EOF;
 statement: clear
   | increment
   | decrement
+  | input
   | whileLoop;
 clear: 'clear' name=ID ';';
 increment: 'incr' name=ID ';';
 decrement: 'decr' name=ID ';';
-whileLoop: 'while' conditionVariable=ID 'not 0 do;' (body+=statement)* 'end;';
+input: 'input' name=ID ';';
+whileLoop: 'while' conditionVariable=ID 'not' '0' 'do' ';' (body+=statement)* 'end;';
 
 
 ID: 'a' .. 'z' ('a' .. 'z' | '0' .. '9' | '_')*;
